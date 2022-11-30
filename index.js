@@ -17,12 +17,54 @@ const questions = [
                 return false;
             }
         }
+    },
+    {
+        type: "input",
+        name: "github",
+        message: "GitHub Username: ",
+        validate: githubInput => {
+            if (githubInput) {
+                return true;
+            }
+            else {
+                console.log("Enter your GitHub username");
+                return false;
+            }
+        }
+    },
+    {
+        type: "input",
+        name: "repository",
+        message: "GitHub Repo Name: ",
+        validate: repositoryInput => {
+        if (repositoryInput) {
+            return true;
+            }
+            else {
+                console.log("Enter your GitHub Repository name");
+                return false;
+            }
+        }
+    },
+    {
+        type: "input",
+        name: "use",
+        message: "Enter the use of your application: ",
+        validate: useInput => {
+            if (useInput) {
+                return true;
+            }
+            else {
+                console.log("Enter the use of your application");
+                return false;
+            }
+        }
     }
 ];
 
 // Create a function to write README file
 function writeToFile(fileName, data) {
-    fs.writeFile(`./dist/${filename}`, data, err => {
+    fs.writeToFile(`./dist/${filename}`, data, err => {
         if (err) {
             throw err
         };
@@ -38,7 +80,7 @@ function init() {
 // Function call to initialize app
 init()
     .then(answers => generateMarkdown(answers))
-    .then(generateReadme => writeFile("README.md", generateReadme))
+    .then(generateReadme => writeToFile("README.md", generateReadme))
     .catch(err => {
         console.log(err);
     });
